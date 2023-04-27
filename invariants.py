@@ -37,6 +37,23 @@ for k in range(2, len(G.nodes()) + 1):
             boxicity = max(boxicity, k)
 print("Boxicity:", boxicity)
 
+# Strength
+strength_dict = nx.algorithms.link_analysis.pagerank_alg.pagerank(G, alpha=0.85, max_iter=100, tol=1e-06)
+node_strengths = [strength_dict[node] for node in G.nodes]
+graph_strength = sum(node_strengths)
+print("Graph Strength:", graph_strength)
+
+# Edge Connectivity
+edge_connectivity = nx.edge_connectivity(G)
+print("Edge Connectivity:", edge_connectivity)
+
+# Chromatic Number
+chromatic_number = nx.algorithms.coloring.greedy_color(G, strategy="largest_first")
+print("Chromatic Number:", len(set(chromatic_number.values())))
+
+# Characteristic Polynomial
+characteristic_polynomial = nx.adjacency_spectrum(G).tolist()
+print("Characteristic Polynomial:", characteristic_polynomial)
 
 
 nx.draw(G)
